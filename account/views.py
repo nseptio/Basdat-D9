@@ -64,7 +64,7 @@ def register_umpire(request):
         # insert data to database
         fname = None
         lname = None
-        nama = None
+        
         # if name only contains one word
         if len(nama.split()) == 1:
             fname = nama
@@ -151,7 +151,7 @@ def register_atlet(request):
             return render(request, "register-umpire.html", context)
         
         # check email is already registered or not
-        cursor.execute(f"SELECT * FROM ATLET WHERE email = '{email}'")
+        cursor.execute(f"SELECT * FROM MEMBER WHERE email = '{email}'")
         records = cursor.fetchmany()
         if len(records) > 0:
             form = RegisterFormAtlet(request.POST or None)
@@ -164,7 +164,7 @@ def register_atlet(request):
         # insert data to database
         fname = None
         lname = None
-        nama = None
+        
         # if name only contains one word
         if len(nama.split()) == 1:
             fname = nama
@@ -177,7 +177,8 @@ def register_atlet(request):
 
         try:
             uuid_umpire = uuid.uuid4()
-            jenis_kelamin = "L" if jenis_kelamin else "P"
+            play = True if play == "Kanan" else False
+            jenis_kelamin = True if jenis_kelamin == "Laki-laki" else False
             cursor.execute(
                 f"insert into MEMBER (ID, Name, email) values ('{uuid_umpire}', '{name}', '{email}')"
             )
@@ -188,7 +189,7 @@ def register_atlet(request):
             connection.commit()
 
             # set cookie and redirect to dashboard
-            response = HttpResponseRedirect(reverse("account:show_main"))
+            response = HttpResponseRedirect(reverse("account:show_main")) #TODO: change to dashboard
             response.set_cookie("role", "atlet")
             response.set_cookie("email", email)
             return response
@@ -233,16 +234,16 @@ def register_pelatih(request):
             return render(request, "register-pelatih.html", context)
 
         # if data is not complete
-        if not email or not negara or not nama or not kategori:
-            form = RegisterFormPelatih(request.POST or None)
-            context = {
-                "form": form,
-                "message": "Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu",
-            }
-            return render(request, "register-pelatih.html", context)
+        # if not email or not negara or not nama or not kategori:
+        #     form = RegisterFormPelatih(request.POST or None)
+        #     context = {
+        #         "form": form,
+        #         "message": "Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu",
+        #     }
+        #     return render(request, "register-pelatih.html", context)
         
         # check email is already registered or not
-        cursor.execute(f"SELECT * FROM UMPIRE WHERE email = '{email}'")
+        cursor.execute(f"SELECT * FROM MEMBER WHERE email = '{email}'")
         records = cursor.fetchmany()
         if len(records) > 0:
             form = RegisterFormPelatih(request.POST or None)
@@ -255,7 +256,7 @@ def register_pelatih(request):
         # insert data to database
         fname = None
         lname = None
-        nama = None
+        
         # if name only contains one word
         if len(nama.split()) == 1:
             fname = nama
@@ -267,17 +268,29 @@ def register_pelatih(request):
             name = fname + " " + lname
 
         try:
-            uuid_umpire = uuid.uuid4()
+            uuid_pelatih = uuid.uuid4()
             cursor.execute(
-                f"insert into MEMBER (ID, Name, email) values ('{uuid_umpire}', '{name}', '{email}')"
+                f"insert into MEMBER (ID, Name, email) values ('{uuid_pelatih}', '{name}', '{email}')"
             )
             cursor.execute(
-                f"insert into PLEATIH values ('{uuid_umpire}', '{negara}', '{kategori}', '{tanggal_mulai}')"
+                f"insert into PELATIH values ('{uuid_pelatih}', '{tanggal_mulai}')"
             )
+            
+            list_uuid_kategori = []
+            for i in kategori:
+                cursor.execute(f"SELECT ID FROM SPESIALISASI WHERE Spesialisasi = '{i}'")
+                records = cursor.fetchmany()
+                list_uuid_kategori.append(records[0][0])
+                
+            for i in list_uuid_kategori:
+                cursor.execute(
+                    f"insert into PELATIH_SPESIALISASI values ('{uuid_pelatih}', '{i}')"
+                )
+                
             connection.commit()
 
             # set cookie and redirect to dashboard
-            response = HttpResponseRedirect(reverse("account:register"))
+            response = HttpResponseRedirect(reverse("account:register")) #TODO: change to dashboard
             response.set_cookie("role", "pelatih")
             response.set_cookie("email", email)
             return response

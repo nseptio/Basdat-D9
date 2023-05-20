@@ -20,10 +20,6 @@ try:
     record = cursor.fetchone()
     print("You are connected to - ", record, "\n")
 
-    cursor.execute("SELECT * FROM MEMBER")
-    record = cursor.fetchall()
-    for i in record:
-        print(i)
 
 except (Exception, Error) as error:
     print("Error while connecting to PostgreSQL", error)

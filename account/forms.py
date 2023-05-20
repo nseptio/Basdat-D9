@@ -80,10 +80,14 @@ class RegisterFormPelatih(forms.Form):
     kategori = forms.MultipleChoiceField(label='Kategori', widget=forms.CheckboxSelectMultiple(
         attrs={'class': 'form-control', 'oninvalid': "this.setCustomValidity('Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu')", 'oninput': "setCustomValidity('')"}),
         choices=[
-            ('dummy1', 'Dummy 1'),
-            ('dummy2', 'Dummy 2'),
-            ('dummy3', 'Dummy 3'),
+            ('Tunggal Putra', 'Tunggal Putra'),
+            ('Tunggal Putri', 'Tunggal Putri'),
+            ('Ganda Putra', 'Ganda Putra'),
+            ('Ganda Putri', 'Ganda Putri'),
+            ('Ganda Campuran', 'Ganda Campuran')
         ]
     )
+    tanggal_mulai = forms.DateField(label='Tanggal Lahir', widget=forms.DateInput({
+        'class': 'form-control', 'type': 'date'}))
 
     
