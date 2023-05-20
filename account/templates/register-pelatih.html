@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block meta %}
+<title>Register Pelatih</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #C4DBF6;
+
+    }
+</style>
+{% endblock meta %}
+
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2>Register Pelatih</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="{{ form.email.id_for_label }}">Email</label>
+          {{ form.email }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.nama.id_for_label }}">Nama</label>
+          {{ form.nama }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.negara.id_for_label }}">Negara</label>
+          {{ form.negara }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.kategori.id_for_label }}" class="form-label">{{ form.kategori.label }}</label>
+            {% for checkbox in form.kategori %}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="{{ checkbox.id_for_label }}" name="{{ checkbox.name }}" value="{{ checkbox.choice_value }}" {% if checkbox.checked %}checked{% endif %}>
+                    <label class="form-check-label" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+                </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

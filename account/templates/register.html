@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block meta %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+</style>
+<title>Enrolled Events Athlete</title>
+
+{% endblock meta %}
+
+{% block content %}
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<h1 class="text-center">Register</h1>
+	</div>
+	<div>
+		<a class="btn btn-primary" href="{% url 'account:register_pelatih' %}" role="button">Register Pelatih</a>
+	</div>
+	<div>
+		<a class="btn btn-primary" href="{% url 'account:register_umpire' %}" role="button">Register Umpire</a>
+	</div>
+	<div>
+		<a class="btn btn-primary" href="{% url 'account:register_atlet' %}" role="button">Register Atlet</a>
+	</div>
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock %}
