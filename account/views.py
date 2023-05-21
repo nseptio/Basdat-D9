@@ -214,10 +214,11 @@ def register_atlet(request):
 
 def register_pelatih(request):
     if request.method == "POST" or "post" and not request.method == "GET":
+        form = RegisterFormPelatih(request.POST or None)
         nama = request.POST.get("nama")
         email = request.POST.get("email")
         negara = request.POST.get("negara")
-        kategori = request.POST.get("kategori")
+        kategori = request.POST.getlist("kategori")
         tanggal_mulai = request.POST.get("tanggal_mulai")
     
         # check email is valid or not
@@ -234,13 +235,13 @@ def register_pelatih(request):
             return render(request, "register-pelatih.html", context)
 
         # if data is not complete
-        # if not email or not negara or not nama or not kategori:
-        #     form = RegisterFormPelatih(request.POST or None)
-        #     context = {
-        #         "form": form,
-        #         "message": "Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu",
-        #     }
-        #     return render(request, "register-pelatih.html", context)
+        if not email or not negara or not nama or not kategori or not tanggal_mulai:
+            form = RegisterFormPelatih(request.POST or None)
+            context = {
+                "form": form,
+                "message": "Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu",
+            }
+            return render(request, "register-pelatih.html", context)
         
         # check email is already registered or not
         cursor.execute(f"SELECT * FROM MEMBER WHERE email = '{email}'")
@@ -290,7 +291,7 @@ def register_pelatih(request):
             connection.commit()
 
             # set cookie and redirect to dashboard
-            response = HttpResponseRedirect(reverse("account:register")) #TODO: change to dashboard
+            response = HttpResponseRedirect(reverse("account:register_pelatih")) #TODO: change to dashboard
             response.set_cookie("role", "pelatih")
             response.set_cookie("email", email)
             return response

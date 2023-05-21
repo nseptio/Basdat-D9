@@ -77,15 +77,17 @@ class RegisterFormPelatih(forms.Form):
         attrs={'class': 'form-control', 'placeholder': 'Nama', 'oninvalid': "this.setCustomValidity('Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu')", 'oninput': "setCustomValidity('')"}))
     negara = forms.CharField(label='Negara', max_length=50, widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Negara', 'oninvalid': "this.setCustomValidity('Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu')", 'oninput': "setCustomValidity('')"}))
-    kategori = forms.MultipleChoiceField(label='Kategori', widget=forms.CheckboxSelectMultiple(
-        attrs={'class': 'form-control', 'oninvalid': "this.setCustomValidity('Data yang diisikan belum lengkap, silahkan lengkapi data terlebih dahulu')", 'oninput': "setCustomValidity('')"}),
+    kategori = forms.TypedMultipleChoiceField(
+        label='Kategori',
+        widget=forms.CheckboxSelectMultiple(),
         choices=[
             ('Tunggal Putra', 'Tunggal Putra'),
             ('Tunggal Putri', 'Tunggal Putri'),
             ('Ganda Putra', 'Ganda Putra'),
             ('Ganda Putri', 'Ganda Putri'),
             ('Ganda Campuran', 'Ganda Campuran')
-        ]
+        ],
+        coerce=str  # Set the data type for selected values
     )
     tanggal_mulai = forms.DateField(label='Tanggal Lahir', widget=forms.DateInput({
         'class': 'form-control', 'type': 'date'}))
