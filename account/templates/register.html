@@ -12,21 +12,20 @@
 {% block content %}
 <div class="container mt-5">
 	<div class="row justify-content-center">
-		<h1 class="text-center">Register</h1>
-	</div>
-	<div>
-		<a class="btn btn-primary" href="{% url 'account:register_pelatih' %}" role="button">Register Pelatih</a>
-	</div>
-	<div>
-		<a class="btn btn-primary" href="{% url 'account:register_umpire' %}" role="button">Register Umpire</a>
-	</div>
-	<div>
-		<a class="btn btn-primary" href="{% url 'account:register_atlet' %}" role="button">Register Atlet</a>
-	</div>
-	<div>
-		<a class="btn btn-primary" href="{% url 'account:login' %}" role="button">Login</a>
+		<div class="col-12 col-md-6">
+			<h1 class="text-center mb-4">Register</h1>
+			<div class="text-center">
+				<a class="btn btn-primary btn-lg mr-2" href="{% url 'account:register_pelatih' %}"
+					role="button">Register Pelatih</a>
+				<a class="btn btn-primary btn-lg mr-2" href="{% url 'account:register_umpire' %}" role="button">Register
+					Umpire</a>
+				<a class="btn btn-primary btn-lg" href="{% url 'account:register_atlet' %}" role="button">Register
+					Atlet</a>
+			</div>
+		</div>
 	</div>
 </div>
+
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 

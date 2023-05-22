@@ -7,8 +7,13 @@ import re
 import uuid
 
 # Create your views here.
-
 def show_main(request):
+    return render(request, 'main.html')
+
+def register(request):
+    return render(request, 'register.html')
+
+def show_dashboard(request):
     if request.COOKIES.get("role"):
         email = request.COOKIES.get("email")
         if request.COOKIES.get("role") == "umpire":
@@ -30,10 +35,6 @@ def show_main(request):
             )
             pelatih = cursor.fetchmany()
             return dashboard_pelatih(request, email, pelatih)
-
-
-def register(request):
-    return render(request, 'register.html')
 
 def register_umpire(request):
     if request.method == "POST" or "post" and not request.method == "GET":
@@ -443,3 +444,8 @@ def login(request):
     context = {}
     return render(request, "login.html", context)
                 
+def logout(request):
+    response = HttpResponseRedirect(reverse("account:login"))
+    for cookie in request.COOKIES:
+        response.delete_cookie(cookie)
+    return response

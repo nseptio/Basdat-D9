@@ -20,14 +20,15 @@ try:
     record = cursor.fetchone()
     print("You are connected to - ", record, "\n")
     
-    cursor.execute("SELECT name, tanggal_mulai, spesialisasi FROM MEMBER M NATURAL JOIN PELATIH P JOIN PELATIH_SPESIALISASI PS ON " +
-                   "P.id = PS.id_pelatih JOIN SPESIALISASI S ON PS.id_spesialisasi = S.id WHERE M.email = 'ifassam6@yolasite.com';")
-    hasil = cursor.fetchall()
-    kategori = []
-    for i in hasil:
-        kategori.append(i[2])
-    print(hasil)
-    print(kategori)
+    # Test
+    # cursor.execute("SELECT name, tanggal_mulai, spesialisasi FROM MEMBER M NATURAL JOIN PELATIH P JOIN PELATIH_SPESIALISASI PS ON " +
+    #                "P.id = PS.id_pelatih JOIN SPESIALISASI S ON PS.id_spesialisasi = S.id WHERE M.email = 'ifassam6@yolasite.com';")
+    # hasil = cursor.fetchall()
+    # kategori = []
+    # for i in hasil:
+    #     kategori.append(i[2])
+    # print(hasil)
+    # print(kategori)
     
 #     SELECT name, tanggal_mulai, spesialisasi FROM MEMBER M NATURAL JOIN PELATIH P JOIN PELATIH_SPESIALISASI PS ON
 # P.id = PS.id_pelatih JOIN SPESIALISASI S ON PS.id_spesialisasi = S.id WHERE M.email = 'ifassam6@yolasite.com';
