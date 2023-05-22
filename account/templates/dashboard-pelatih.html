@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+    {% include 'navbar-atlet.html' %}
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1>Halaman Pelatih</h1>
+            <hr>
+
+            <div>
+                <label>Email:</label>
+                <p>{{ email }}</p>
+            </div>
+
+            <div>
+                <label>Tanggal Mulai:</label>
+                <p>{{ tanggal_mulai }}</p>
+            </div>
+
+            <div>
+                <label>Kategori:</label>
+                <ul>
+                    {% for k in kategori %}
+                    <li>{{ k }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

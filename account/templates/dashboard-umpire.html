@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1>Halaman Pelatih</h1>
+            <hr>
+
+            <div>
+                <label>Email:</label>
+                <p>{{ email }}</p>
+            </div>
+
+            <div>
+                <label>Nama:</label>
+                <p>{{ nama }}</p>
+            </div>
+
+            <div>
+                <label>Negara:</label>
+                <p>{{ negara }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

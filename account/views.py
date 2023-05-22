@@ -380,7 +380,116 @@ def dashboard_pelatih(request, email):
     response.set_cookie("email", email)
     return response
         
+def login(request):
+    # if request.COOKIES.get("role"):
+    #     return HttpResponseRedirect(reverse("account:register"))
     
+    if request.method == "POST":
+        nama = request.POST.get("nama")
+        email = request.POST.get("email")
+        
+        cursor.execute(f"select email, name from member where email = '{email}'")
+        user = cursor.fetchone()
+        if(len(user) == 0):
+            context = {
+                'message': 'email tidak ditemukan!',
+                'status': 'error',
+            }
+            return render(request, 'login.html', context)
+        nama_database = user[1]
+        email_database = user[0]
+
+        if(email != email_database or nama != nama_database):
+            context = {
+                'message': 'Cek kembali email dan nama anda!',
+                'status': 'error',
+            }
+            return render(request, 'login.html', context)
+        else:
+            cursor.execute(
+                f"SELECT * FROM UMPIRE NATURAL JOIN MEMBER WHERE MEMBER.email = '{email}'"
+            )
+            umpire = cursor.fetchmany()
+            if len(umpire) == 1:
+                negara = umpire[0][1]
+                nama = umpire[0][2]
+                
+                context = {
+                    "role": "umpire",
+                    "email": email,
+                    "negara": negara,
+                    "nama": nama,
+                }
+                response = render(request, "dashboard-umpire.html", context)
+                response.set_cookie("role", "umpire")
+                response.set_cookie("email", email)
+                return response
+            
+            cursor.execute(
+                f"SELECT * FROM PELATIH NATURAL JOIN MEMBER WHERE MEMBER.email = '{email}'"
+            )
+            pelatih = cursor.fetchmany()
+            if len(pelatih) == 1:
+                print("pelatih")
+                tanggal_mulai = pelatih[0][1]
+                nama = pelatih[0][2]
+                cursor.execute("SELECT name, tanggal_mulai, spesialisasi FROM MEMBER M NATURAL JOIN PELATIH P JOIN PELATIH_SPESIALISASI PS ON " +
+                   "P.id = PS.id_pelatih JOIN SPESIALISASI S ON PS.id_spesialisasi = S.id WHERE M.email = 'ifassam6@yolasite.com';")
+                pelatih_data = cursor.fetchall()
+                kategori = []
+                for data in pelatih_data:
+                    kategori.append(data[2])
+                
+                context = {
+                    "role": "pelatih",
+                    "email": email,
+                    "tanggal_mulai": tanggal_mulai,
+                    "nama": nama,
+                    "kategori": kategori,
+                }
+                print(context)
+                response = render(request, "dashboard-pelatih.html", context)
+                response.set_cookie("role", "pelatih")
+                response.set_cookie("email", email)
+                return response
+            
+            cursor.execute(
+                f"SELECT * FROM ATLET NATURAL JOIN MEMBER WHERE MEMBER.email = '{email}'"
+            )
+            atlet = cursor.fetchmany()
+            if len(atlet) == 1:
+                tanggal_lahir = atlet[0][1]
+                negara = atlet[0][2]
+                is_play_right = atlet[0][3]
+                tinggi_badan = atlet[0][4]
+                world_ranking = atlet[0][5]
+                is_male = atlet[0][6]
+                nama = atlet[0][7]
+                
+                play = "Kanan" if is_play_right else "Kiri"
+                gender = "Laki-Laki" if is_male else "Perempuan"
+                
+                context = {
+                    "role": "atlet",
+                    "email": email,
+                    "tanggal_lahir": tanggal_lahir,
+                    "negara": negara,
+                    "play": play,
+                    "tinggi_badan": tinggi_badan,
+                    "world_ranking": world_ranking,
+                    "gender": gender,
+                    "nama": nama,
+                }
+                response = render(request, "dashboard-atlet.html", context)
+                response.set_cookie("role", "atlet")
+                response.set_cookie("email", email)
+                return response
+            
+    context = {}
+    return render(request, "login.html", context)
+                
+                
+                
 
 
 

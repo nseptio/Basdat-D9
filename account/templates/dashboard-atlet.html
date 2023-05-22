@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+    {% include 'navbar-atlet.html' %}
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1>Halaman Atlet</h1>
+            <hr>
+
+            <div>
+                <label>Email:</label>
+                <p>{{ email }}</p>
+            </div>
+
+            <div>
+                <label>Tanggal Lahir:</label>
+                <p>{{ tanggal_lahir }}</p>
+            </div>
+
+            <div>
+                <label>Negara:</label>
+                <p>{{ negara }}</p>
+            </div>
+
+            <div>
+                <label>Play Right:</label>
+                <p>{{ play }}</p>
+            </div>
+
+            <div>
+                <label>Tinggi Badan:</label>
+                <p>{{ tinggi_badan }}</p>
+            </div>
+
+            <div>
+                <label>World Ranking:</label>
+                <p>{{ world_ranking }}</p>
+            </div>
+
+            <div>
+                <label>Jenis Kelamin:</label>
+                <p>{{ gender }}</p>
+            </div>
+
+            <div>
+                <label>Nama:</label>
+                <p>{{ nama }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
