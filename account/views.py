@@ -425,21 +425,32 @@ def login(request):
             )
             umpire = cursor.fetchmany()
             if len(umpire) == 1:
-                return dashboard_umpire(request, email, umpire)
+                
+                response = HttpResponseRedirect(reverse("account:show_dashboard"))
+                response.set_cookie("role", "umpire")
+                response.set_cookie("email", email)
+                return response
             
             cursor.execute(
                 f"SELECT * FROM PELATIH NATURAL JOIN MEMBER WHERE MEMBER.email = '{email}'"
             )
             pelatih = cursor.fetchmany()
             if len(pelatih) == 1:
-                return dashboard_pelatih(request, pelatih, email)
+                response = HttpResponseRedirect(reverse("account:show_dashboard"))
+                response.set_cookie("role", "pelatih")
+                response.set_cookie("email", email)
+                return response
             
             cursor.execute(
                 f"SELECT * FROM ATLET NATURAL JOIN MEMBER WHERE MEMBER.email = '{email}'"
             )
             atlet = cursor.fetchmany()
             if len(atlet) == 1:
-                return dashboard_atlet(request, email, atlet)
+                response = HttpResponseRedirect(reverse("account:show_dashboard"))
+                response.set_cookie("role", "atlet")
+                response.set_cookie("email", email)
+                return response
+            
             
     context = {}
     return render(request, "login.html", context)
