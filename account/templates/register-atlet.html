@@ -2,64 +2,64 @@
 {% block meta %}
 <title>Register Atlet</title>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 
-    body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #C4DBF6;
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #C4DBF6;
 
-    }
+  }
 </style>
 {% endblock meta %}
 
 {% block content %}
 <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <h2>Register Atlet</h2>
-        <form method="post">
-          {% csrf_token %}
-          <div class="form-group">
-            <label for="{{ form.email.id_for_label }}">Email</label>
-            {{ form.email }}
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2>Register Atlet</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="{{ form.email.id_for_label }}">Email</label>
+          {{ form.email }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.nama.id_for_label }}">Nama</label>
+          {{ form.nama }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.negara.id_for_label }}">Negara</label>
+          {{ form.negara }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.tanggal_lahir.id_for_label }}">Tanggal Lahir</label>
+          {{ form.tanggal_lahir }}
+        </div>
+        <div class="form-group">
+          <label>Play</label><br>
+          <div class="form-check form-check-inline">
+            {{ form.play.0 }}
           </div>
-          <div class="form-group">
-            <label for="{{ form.nama.id_for_label }}">Nama</label>
-            {{ form.nama }}
+          <div class="form-check form-check-inline">
+            {{ form.play.1 }}
           </div>
-          <div class="form-group">
-            <label for="{{ form.negara.id_for_label }}">Negara</label>
-            {{ form.negara }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.tinggi_badan.id_for_label }}">Tinggi Badan</label>
+          {{ form.tinggi_badan }}
+        </div>
+        <div class="form-group">
+          <label>Jenis Kelamin</label><br>
+          <div class="form-check form-check-inline">
+            {{ form.jenis_kelamin.0 }}
           </div>
-          <div class="form-group">
-            <label for="{{ form.tanggal_lahir.id_for_label }}">Tanggal Lahir</label>
-            {{ form.tanggal_lahir }}
+          <div class="form-check form-check-inline">
+            {{ form.jenis_kelamin.1 }}
           </div>
-          <div class="form-group">
-            <label>Play</label><br>
-            <div class="form-check form-check-inline">
-              {{ form.play.0 }}
-            </div>
-            <div class="form-check form-check-inline">
-              {{ form.play.1 }}
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="{{ form.tinggi_badan.id_for_label }}">Tinggi Badan</label>
-            {{ form.tinggi_badan }}
-          </div>
-          <div class="form-group">
-            <label>Jenis Kelamin</label><br>
-            <div class="form-check form-check-inline">
-              {{ form.jenis_kelamin.0 }}
-            </div>
-            <div class="form-check form-check-inline">
-              {{ form.jenis_kelamin.1 }}
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
+  </div>
 </div>
 {% endblock %}
