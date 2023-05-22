@@ -12,11 +12,24 @@ def show_main(request):
     if request.COOKIES.get("role"):
         email = request.COOKIES.get("email")
         if request.COOKIES.get("role") == "umpire":
-            return dashboard_umpire(request, email)
+            cursor.execute(
+                f"SELECT * FROM UMPIRE NATURAL JOIN MEMBER WHERE MEMBER.email = '{email}'"
+            )
+            umpire = cursor.fetchmany()
+            return dashboard_umpire(request, email, umpire)
         elif request.COOKIES.get("role") == "atlet":
-            return dashboard_atlet(request, email)
+            cursor.execute(
+                f"SELECT * FROM ATLET NATURAL JOIN MEMBER WHERE MEMBER.email = '{email}'"
+            )
+            atlet = cursor.fetchmany()
+            
+            return dashboard_atlet(request, email, atlet)
         else:
-            return dashboard_pelatih(request, email)
+            cursor.execute(
+                f"SELECT * FROM PELATIH NATURAL JOIN MEMBER WHERE MEMBER.email = '{email}'"
+            )
+            pelatih = cursor.fetchmany()
+            return dashboard_pelatih(request, email, pelatih)
 
 
 def register(request):
@@ -89,7 +102,7 @@ def register_umpire(request):
             connection.commit()
 
             # set cookie and redirect to dashboard
-            response = HttpResponseRedirect(reverse("account:register"))
+            response = HttpResponseRedirect(reverse("account:show_main"))
             response.set_cookie("role", "umpire")
             response.set_cookie("email", email)
             return response
@@ -291,7 +304,7 @@ def register_pelatih(request):
             connection.commit()
 
             # set cookie and redirect to dashboard
-            response = HttpResponseRedirect(reverse("account:register_pelatih")) #TODO: change to dashboard
+            response = HttpResponseRedirect(reverse("account:show_main")) #TODO: change to dashboard
             response.set_cookie("role", "pelatih")
             response.set_cookie("email", email)
             return response
@@ -314,67 +327,67 @@ def register_pelatih(request):
 
     return render(request, "register-pelatih.html", context)
 
-def dashboard_umpire(request, email):
-    cursor.execute(f"SELECT * FROM MEMBER WHERE email = '{email}'")
-    member_data = cursor.fetchmany()[0]
-    uuid = member_data[0]
-    name = member_data[1]
-    
-    cursor.execute(f"SELECT * FROM UMPIRE WHERE id = '{uuid}'")
-    umpire_data = cursor.fetchmany()[0]
-    negara = umpire_data[1]
+def dashboard_umpire(request, email, umpire):
+    negara = umpire[0][1]
+    nama = umpire[0][2]
     
     context = {
-        "name": name,
+        "role": "umpire",
         "email": email,
         "negara": negara,
+        "nama": nama,
     }
-    
     response = render(request, "dashboard-umpire.html", context)
     response.set_cookie("role", "umpire")
     response.set_cookie("email", email)
     return response
 
-def dashboard_atlet(request, email):
-    cursor.execute(f"SELECT * FROM MEMBER WHERE email = '{email}'")
-    member_data = cursor.fetchmany()[0]
-    uuid = member_data[0]
-    name = member_data[1]
+def dashboard_atlet(request, email, atlet):
+    tanggal_lahir = atlet[0][1]
+    negara = atlet[0][2]
+    is_play_right = atlet[0][3]
+    tinggi_badan = atlet[0][4]
+    world_ranking = atlet[0][5]
+    is_male = atlet[0][6]
+    nama = atlet[0][7]
     
-    cursor.execute(f"SELECT * FROM ATLET WHERE id = '{uuid}'")
-    atlet_data = cursor.fetchmany()[0]
-    negara = atlet_data[1]
+    play = "Kanan" if is_play_right else "Kiri"
+    gender = "Laki-Laki" if is_male else "Perempuan"
     
     context = {
-        "name": name,
+        "role": "atlet",
         "email": email,
+        "tanggal_lahir": tanggal_lahir,
         "negara": negara,
+        "play": play,
+        "tinggi_badan": tinggi_badan,
+        "world_ranking": world_ranking,
+        "gender": gender,
+        "nama": nama,
     }
-    
     response = render(request, "dashboard-atlet.html", context)
     response.set_cookie("role", "atlet")
     response.set_cookie("email", email)
     return response
 
-def dashboard_pelatih(request, email):
-    cursor.execute(f"SELECT * FROM MEMBER WHERE email = '{email}'")
-    member_data = cursor.fetchmany()[0]
-    uuid = member_data[0]
-    name = member_data[1]
-    
-    cursor.execute(f"SELECT * FROM PELATIH WHERE id = '{uuid}'")
-    pelatih_data = cursor.fetchmany()[0]
-    tanggal_mulai = pelatih_data[1]
-    
-    cursor.execute(f"SELECT * FROM PELATIH_SPESIALISASI WHERE id = '{uuid}'")
-    
+def dashboard_pelatih(request, email, pelatih):
+    tanggal_mulai = pelatih[0][1]
+    nama = pelatih[0][2]
+    cursor.execute("SELECT name, tanggal_mulai, spesialisasi FROM MEMBER M NATURAL JOIN PELATIH P JOIN PELATIH_SPESIALISASI PS ON " +
+        "P.id = PS.id_pelatih JOIN SPESIALISASI S ON PS.id_spesialisasi = S.id WHERE M.email = '{email}';")
+    pelatih_data = cursor.fetchall()
+    kategori = []
+    for data in pelatih_data:
+        kategori.append(data[2])
     
     context = {
-        "name": name,
+        "role": "pelatih",
         "email": email,
         "tanggal_mulai": tanggal_mulai,
+        "nama": nama,
+        "kategori": kategori,
     }
-    
+    print(context)
     response = render(request, "dashboard-pelatih.html", context)
     response.set_cookie("role", "pelatih")
     response.set_cookie("email", email)
@@ -411,87 +424,22 @@ def login(request):
             )
             umpire = cursor.fetchmany()
             if len(umpire) == 1:
-                negara = umpire[0][1]
-                nama = umpire[0][2]
-                
-                context = {
-                    "role": "umpire",
-                    "email": email,
-                    "negara": negara,
-                    "nama": nama,
-                }
-                response = render(request, "dashboard-umpire.html", context)
-                response.set_cookie("role", "umpire")
-                response.set_cookie("email", email)
-                return response
+                return dashboard_umpire(request, email, umpire)
             
             cursor.execute(
                 f"SELECT * FROM PELATIH NATURAL JOIN MEMBER WHERE MEMBER.email = '{email}'"
             )
             pelatih = cursor.fetchmany()
             if len(pelatih) == 1:
-                print("pelatih")
-                tanggal_mulai = pelatih[0][1]
-                nama = pelatih[0][2]
-                cursor.execute("SELECT name, tanggal_mulai, spesialisasi FROM MEMBER M NATURAL JOIN PELATIH P JOIN PELATIH_SPESIALISASI PS ON " +
-                   "P.id = PS.id_pelatih JOIN SPESIALISASI S ON PS.id_spesialisasi = S.id WHERE M.email = 'ifassam6@yolasite.com';")
-                pelatih_data = cursor.fetchall()
-                kategori = []
-                for data in pelatih_data:
-                    kategori.append(data[2])
-                
-                context = {
-                    "role": "pelatih",
-                    "email": email,
-                    "tanggal_mulai": tanggal_mulai,
-                    "nama": nama,
-                    "kategori": kategori,
-                }
-                print(context)
-                response = render(request, "dashboard-pelatih.html", context)
-                response.set_cookie("role", "pelatih")
-                response.set_cookie("email", email)
-                return response
+                return dashboard_pelatih(request, pelatih, email)
             
             cursor.execute(
                 f"SELECT * FROM ATLET NATURAL JOIN MEMBER WHERE MEMBER.email = '{email}'"
             )
             atlet = cursor.fetchmany()
             if len(atlet) == 1:
-                tanggal_lahir = atlet[0][1]
-                negara = atlet[0][2]
-                is_play_right = atlet[0][3]
-                tinggi_badan = atlet[0][4]
-                world_ranking = atlet[0][5]
-                is_male = atlet[0][6]
-                nama = atlet[0][7]
-                
-                play = "Kanan" if is_play_right else "Kiri"
-                gender = "Laki-Laki" if is_male else "Perempuan"
-                
-                context = {
-                    "role": "atlet",
-                    "email": email,
-                    "tanggal_lahir": tanggal_lahir,
-                    "negara": negara,
-                    "play": play,
-                    "tinggi_badan": tinggi_badan,
-                    "world_ranking": world_ranking,
-                    "gender": gender,
-                    "nama": nama,
-                }
-                response = render(request, "dashboard-atlet.html", context)
-                response.set_cookie("role", "atlet")
-                response.set_cookie("email", email)
-                return response
+                return dashboard_atlet(request, email, atlet)
             
     context = {}
     return render(request, "login.html", context)
                 
-                
-                
-
-
-
-    
-
