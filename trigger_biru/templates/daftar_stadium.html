@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Daftar Event</title>
+</head>
+<body>
+    <div class="container mt-5 table-responsive">
+        <table class="table table-bordered align-middle">
+          <thead class="table-primary">
+            <tr>
+              <th scope="col" class="text-center font-weight-bolder">Nama Stadium</th>
+              <th scope="col" class="text-center font-weight-bolder">Negara</th>
+              <th scope="col" class="text-center font-weight-bolder">Kapasitas</th>
+              <th scope="col" class="text-center font-weight-bolder">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data_stadium in stadium %}
+            <tr>
+                <td>{{data_stadium.0}}</td>
+                <td>{{data_stadium.3}}</td>
+                <td>{{data_stadium.2}}</td>
+                <td class="text-center">
+                    <a class="btn btn-outline-primary" href="{% url 'trigger_biru:daftar_event' nama_stadium=data_stadium.0 %}">Pilih</a>
+                </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    
+    <!-- Bootstrap JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

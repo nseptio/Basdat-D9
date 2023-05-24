@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <title>Input Data Form</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        FORM PEMILIHAN PARTAI KOMPETISI
+                    </div>
+                    <div class="card-body">
+                        <div class="border-bottom m-3 border-5 border-dark">
+                            <h5 class="card-title mx">Event: {{data_event.0}}</h5>
+                            <p class="card-text">Hadiah: {{data_event.7}}</p>
+                            <p class="card-text">Tanggal Mulai: {{data_event.4}}</p>
+                            <p class="card-text">Tanggal Selesai: {{data_event.4}}</p>
+                            <p class="card-text">Kategori: {{data_event.6}}</p>
+                            <p class="card-text">Kapasitas: {{data_stadium.2}} orang atau pasangan / partai</p>
+                            <p class="card-text">Stadium: {{data_stadium.0}}</p>
+                            <p class="card-text mb-2">Negara: {{data_stadium.3}}</p>
+                        </div>
+                        <table class="table table-bordered align-middle">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th scope="col" class="text-center font-weight-bolder">Kategori</th>
+                                    <th scope="col" class="text-center font-weight-bolder">Partner</th>
+                                    <th scope="col" class="text-center font-weight-bolder">Kapasitas</th>
+                                    <th scope="col" class="text-center font-weight-bolder">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in data_partai %}
+                                <form action="." method="post">
+                                    {% csrf_token %}
+                                    <tr class="text-center">
+                                        <td>{{ data.0 }}</td>
+                                        <input type="hidden" name="jenis-partai" value="{{ data.0 }}" />
+                                        <td>
+                                            {% if data.0 == "Ganda Putra" and data_atlet.1 or data.1 == "Ganda Putri" and not data_atlet.1 %}
+                                                <div class="form-group">
+                                                    <select class="form-select" id="partner-{{ data.0 }}" name="partner" required>
+                                                        <option disabled selected >Pilih Partner</option>
+                                                        {% for partner in available_atlet_ganda %}
+                                                            {% if partner.1 == data_atlet.1 %}
+                                                                <option value="{{ partner.2 }}">{{ partner.0 }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            {% elif data.0 == "Ganda Campuran" %}
+                                                <div class="form-group">
+                                                    <select class="form-select" id="partner-{{ data.0 }}" name="partner" required>
+                                                        <option disabled selected >Pilih Partner</option>
+                                                        {% for partner in available_atlet_ganda %}
+                                                            <option value="{{ partner.2 }}">{{ partner.0 }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            {% else %}
+                                                <p>-</p>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ data.1 }}{% verbatim %}/{% endverbatim %}{{ data_stadium.2 }}</td>
+                                        <!-- Jika partai cewe dan orangnya cewe dan belom daftar masuk -->
+                                        <!-- Jika partai cowo dan orangnya cowo dan belom daftar masuk -->
+                                        <!-- Jika partai campuran masuk dan belom daftar masuk -->
+                                        <td class="text-center">
+                                        {% if 'Putra' in data.0 and data_atlet.1 and not data.2 %}
+                                            <button type="submit" class="btn btn-outline-primary">Submit</button>
+                                        {% elif 'Putri' in data.0 and not data_atlet.1 and not data.2 %}
+                                            <button type="submit" class="btn btn-outline-primary">Submit</button>
+                                        {% elif 'Campuran' in data.0 and not data.2 %}
+                                            <button type="submit" class="btn btn-outline-primary">Submit</button>
+                                        {% else %}
+                                            <p>-</p>
+                                        {% endif %}
+                                    </td>
+                                    </tr>
+                                </form>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% if messages %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for message in messages %}
+                            <div class="alert-message">
+                                {{ message }}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

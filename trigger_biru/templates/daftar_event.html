@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+  
+      body {
+          font-family: 'Poppins', sans-serif;
+          background-color: #C4DBF6;
+  
+      }
+  
+      th, td {
+        vertical-align: middle;
+      }
+  
+      .nav-item .nav-link {
+          font-family: 'Poppins', sans-serif;
+          border-radius: 20px;
+          padding: 8px 15px;
+      }
+  
+      .nav-item .nav-link:hover {
+          color: #fff;
+      }
+  
+      .nav-item .nav-link.active {
+          background-color: #fff;
+          color: #000;
+      }
+  
+      .navbar {
+          background: linear-gradient(120deg, #b23850, #3b8beb);
+      }
+  
+      .bg-table {
+          background-color: #3b8beb;
+          border-radius: 20px;
+          padding: 12px;
+      }
+  
+      .bg-secondary-table {
+          background-color: #b23850;
+          border-radius: 20px;
+          padding: 12px;
+      }
+  
+      th, td {
+        vertical-align: middle;
+      } 
+    </style>
+    <title>Daftar Event</title>
+</head>
+<body>
+    <div class="container mt-5 table-responsive">
+        <table class="table table-bordered align-middle">
+          <thead class="table-primary">
+            <tr>
+              <th scope="col" class="text-center font-weight-bolder">Nama Event</th>
+              <th scope="col" class="text-center font-weight-bolder">Total Hadiah</th>
+              <th scope="col" class="text-center font-weight-bolder">Tanggal Mulai</th>
+              <th scope="col" class="text-center font-weight-bolder">Kategori</th>
+              <th scope="col" class="text-center font-weight-bolder">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data_event in daftar_event %}
+            <tr>
+                <td>{{data_event.0}}</td>
+                <td>{{data_event.1}}</td>
+                <td>{{data_event.2}}</td>
+                <td>{{data_event.3}}</td>
+                <td class="text-center">
+                    <a class="btn btn-outline-primary" href="{% url 'trigger_biru:daftar_partai' nama_stadium=nama_stadium nama_event=data_event.0 tahun_event=data_event.4 %}">Pilih</a>
+                </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    
+    <!-- Bootstrap JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
