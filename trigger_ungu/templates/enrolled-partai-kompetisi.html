@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+
+{% block meta %}
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+	body {
+		font-family: 'Poppins', sans-serif;
+		background-color: #C4DBF6;
+	}
+
+	th,
+	td {
+		vertical-align: middle;
+	}
+
+	.nav-item .nav-link {
+		font-family: 'Poppins', sans-serif;
+		border-radius: 20px;
+		padding: 8px 15px;
+	}
+
+	.nav-item .nav-link:hover {
+		color: #fff;
+	}
+
+	.nav-item .nav-link.active {
+		background-color: #fff;
+		color: #000;
+	}
+
+	.navbar {
+		background: linear-gradient(120deg, #b23850, #3b8beb);
+	}
+
+	.bg-table {
+		background-color: #3b8beb;
+		border-radius: 20px;
+		padding: 12px;
+	}
+
+	.bg-secondary-table {
+		background-color: #b23850;
+		border-radius: 20px;
+		padding: 12px;
+	}
+</style>
+<title>Enrolled Events Athlete</title>
+
+{% endblock meta %}
+
+{% block content %}
+
+<main>
+	<section>
+		{% include 'navbar-atlet.html' %}
+	</section>
+
+	<div class="row m-3">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header bg-table text-white">
+					<h3 class="card-title text-dark">Enrolled Events List</h3>
+				</div>
+				<div class="card-body">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr class="bg-secondary-table text-white text-center align-middle">
+								<th>Nama Event</th>
+								<th>Tahun</th>
+								<th>Stadium</th>
+								<th>Jenis Partai</th>
+								<th>Kategori Superseries</th>
+								<th>Tanggal Mulai</th>
+								<th>Tanggal Selesai</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for item in record %}
+							<tr>
+								<td>{{ item.0 }}</td>
+								<td>{{ item.1 }}</td>
+								<td>{{ item.2 }}</td>
+								<td>{{ item.3 }}</td>
+								<td>{{ item.4 }}</td>
+								<td>{{ item.5 }}</td>
+								<td>{{ item.6 }}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</main>
+{% endblock %}
