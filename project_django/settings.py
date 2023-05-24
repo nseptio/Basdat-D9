@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account',
     'trigger_ungu',
+    'trigger_biru',
 ]
 
 MIDDLEWARE = [
