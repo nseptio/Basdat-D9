@@ -46,6 +46,29 @@
     .table-container tbody tr:nth-child(even) {
       background-color: #f2f2f2;
     }
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+  .nav-item .nav-link {
+    font-family: 'Poppins', sans-serif;
+    border-radius: 20px;
+    padding: 8px 15px;
+  }
+
+  .nav-item .nav-link:hover {
+    background-color: #3b8beb;
+    color: #fff;
+  }
+
+  .nav-item .nav-link.active {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .navbar {
+    background: linear-gradient(120deg, #b23850, #3b8beb);
+  }
+
   </style>
 </head>
 <body>
@@ -69,7 +92,6 @@
           </tr>
         </thead>
         <tbody>
-          <!-- <tr> -->
             {% for atlet_kualifikasi in daftar_atlet_kualifikasi %}
             <tr>
             <td>{{ atlet_kualifikasi.name }}</td>
@@ -144,8 +166,8 @@
           {% for atlet_ganda in daftar_atlet_ganda %}
               <tr>
                 <td>{{ atlet_ganda.id_atlet_ganda }}</td>
-                <td>{{ atlet_ganda.nama_atlet_1 }}</td>
-                <td>{{ atlet_ganda.nama_atlet_2 }}</td>
+                <td>{{ atlet_ganda.nama1 }}</td>
+                <td>{{ atlet_ganda.nama2 }}</td>
                 <td>{{ atlet_ganda.total_point }}</td>
               </tr>
               {% endfor %} 
