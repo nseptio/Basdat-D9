@@ -20,7 +20,7 @@ Berikut daftar *role* dan deskripsi dari masing-masing *role*.
 ### 🗃️Daftar Modul yang Diimplementasikan🗃️
 .......................................
 
-### 🥺Referensi landing page yang kemungkinan akan digunakan🥺
+### 🥺Lain-Lain🥺
 ............................................
 
 
