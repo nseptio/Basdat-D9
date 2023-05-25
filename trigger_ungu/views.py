@@ -58,6 +58,9 @@ def show_enrolled_event(request):
     }
     return render(request, 'enrolled-event-atlet.html', context)
 
+def delete_enrolled_event(request):
+    pass
+
 def register_sponsor(request):
     if request.method == 'POST' or "post":
         email = request.COOKIES.get("email")

@@ -25,6 +25,8 @@ PRODUCTION = os.getenv('DATABASE_URL') is not None
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-3@5wx%(^*zl68l(o$^m-3%cvjv0g&mom1ra=oj5f048_al57s7'
 
+CSRF_TRUSTED_ORIGINS = ['https://basdat-d9-production.up.railway.app']
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
