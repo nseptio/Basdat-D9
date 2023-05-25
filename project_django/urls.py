@@ -23,11 +23,10 @@ from latih_atlet.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('account.urls')),
-    path('daftar_atlet/', show_daftar_atlet, name='show_daftar_atlet'),
-    path('hasil_pertandingan/', show_hasil_pertandingan, name='show_hasil_pertandingan'),
-    path('latih_atlet/', show_latih_atlet, name='show_latih_atlet'),
-    path('list_atlet_dilatih/', show_list_atlet_dilatih, name='show_list_atlet_dilatih'),
-    path('partai_kompetisi_event/', show_partai_kompetisi_event, name='show_partai_kompetisi_event'),
+    path('pink_hasil_pertandingan/', include('hasil_pertandingan.urls')),
+    path('pink_latih_atlet/', include('latih_atlet.urls')),
+    path('pink_daftar_atlet/', include('daftar_atlet.urls')),
+    path('pink_partai_kompetisi_event/', include('partai_kompetisi_event.urls')),
     path('ungu/', include('trigger_ungu.urls')),
     path('biru/', include('trigger_biru.urls')),
 ]
