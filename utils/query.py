@@ -21,18 +21,21 @@ try:
     print("You are connected to - ", record, "\n")
     
     # Test
-    # cursor.execute("SELECT name, tanggal_mulai, spesialisasi FROM MEMBER M NATURAL JOIN PELATIH P JOIN PELATIH_SPESIALISASI PS ON " +
-    #                "P.id = PS.id_pelatih JOIN SPESIALISASI S ON PS.id_spesialisasi = S.id WHERE M.email = 'ifassam6@yolasite.com';")
-    # hasil = cursor.fetchall()
-    # kategori = []
-    # for i in hasil:
-    #     kategori.append(i[2])
-    # print(hasil)
-    # print(kategori)
-    
-#     SELECT name, tanggal_mulai, spesialisasi FROM MEMBER M NATURAL JOIN PELATIH P JOIN PELATIH_SPESIALISASI PS ON
-# P.id = PS.id_pelatih JOIN SPESIALISASI S ON PS.id_spesialisasi = S.id WHERE M.email = 'ifassam6@yolasite.com';
-
+    # cursor.execute(f"""
+    # SELECT S.nama_brand
+    # FROM SPONSOR S
+    # WHERE S.id NOT IN (
+    #     SELECT id_sponsor
+    #     FROM ATLET_SPONSOR ATS
+    #     JOIN ATLET A ON A.id = ATS.id_atlet
+    #     NATURAL JOIN MEMBER M
+    #     WHERE M.email = 'kballeinea@dell.com'
+    # );
+    # """)
+    # record = cursor.fetchall()
+    # print(record, type(record), type(record[0]))
+    # list_sponsor = [i[0] for i in record]
+    # print(list_sponsor)
 
 except (Exception, Error) as error:
     print("Error while connecting to PostgreSQL", error)
