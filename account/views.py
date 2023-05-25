@@ -103,7 +103,7 @@ def register_umpire(request):
             connection.commit()
 
             # set cookie and redirect to dashboard
-            response = HttpResponseRedirect(reverse("account:show_main"))
+            response = HttpResponseRedirect(reverse("account:show_dashboard"))
             response.set_cookie("role", "umpire")
             response.set_cookie("email", email)
             return response
@@ -190,20 +190,23 @@ def register_atlet(request):
             name = fname + " " + lname
 
         try:
-            uuid_umpire = uuid.uuid4()
+            uuid_atlet = uuid.uuid4()
             play = True if play == "Kanan" else False
             jenis_kelamin = True if jenis_kelamin == "Laki-laki" else False
+            
             cursor.execute(
-                f"insert into MEMBER (ID, Name, email) values ('{uuid_umpire}', '{name}', '{email}')"
+                f"insert into MEMBER (ID, Name, email) values ('{uuid_atlet}', '{name}', '{email}')"
             )
             cursor.execute(
-                f"insert into atlet(ID, Tgl_Lahir, Negara_Asal, Play_Right, Height, World_Rank, Jenis_Kelamin)" +
-                "values ('{uuid_umpire}', '{tanggal_lahir}', '{negara}',  '{play}', '{tinggi_badan}', '{jenis_kelamin})"
+                f"""
+                INSERT INTO ATLET(ID, Tgl_Lahir, Negara_Asal, Play_Right, Height, World_Rank, Jenis_Kelamin)
+                VALUES ('{uuid_atlet}', '{tanggal_lahir}', '{negara}',  '{play}', '{tinggi_badan}', DEFAULT,'{jenis_kelamin}');
+                """
             )
             connection.commit()
 
             # set cookie and redirect to dashboard
-            response = HttpResponseRedirect(reverse("account:show_main")) #TODO: change to dashboard
+            response = HttpResponseRedirect(reverse("account:show_dashboard")) #TODO: change to dashboard
             response.set_cookie("role", "atlet")
             response.set_cookie("email", email)
             return response
@@ -305,7 +308,7 @@ def register_pelatih(request):
             connection.commit()
 
             # set cookie and redirect to dashboard
-            response = HttpResponseRedirect(reverse("account:show_main")) #TODO: change to dashboard
+            response = HttpResponseRedirect(reverse("account:show_dashboard")) #TODO: change to dashboard
             response.set_cookie("role", "pelatih")
             response.set_cookie("email", email)
             return response

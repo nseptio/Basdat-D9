@@ -28,4 +28,5 @@ urlpatterns = [
     path('latih_atlet/', show_latih_atlet, name='show_latih_atlet'),
     path('list_atlet_dilatih/', show_list_atlet_dilatih, name='show_list_atlet_dilatih'),
     path('partai_kompetisi_event/', show_partai_kompetisi_event, name='show_partai_kompetisi_event'),
+    path('ungu/', include('trigger_ungu.urls')),
 ]

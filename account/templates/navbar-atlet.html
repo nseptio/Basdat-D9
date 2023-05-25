@@ -2,68 +2,98 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar Background Color</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 
-        .nav-item .nav-link {
-            font-family: 'Poppins', sans-serif;
-            border-radius: 20px;
-            padding: 8px 15px;
-        }
+		.nav-item .nav-link {
+			font-family: 'Poppins', sans-serif;
+			border-radius: 20px;
+			padding: 8px 15px;
+		}
 
-        .nav-item .nav-link:hover {
-            background-color: #3b8beb;
-            color: #fff;
-        }
+		.nav-item .nav-link:hover {
+			background-color: #3b8beb;
+			color: #fff;
+		}
 
-        .nav-item .nav-link.active {
-            background-color: #fff;
-            color: #000;
-        }
+		.nav-item .nav-link.active {
+			background-color: #fff;
+			color: #000;
+		}
 
-        .navbar {
-            background: linear-gradient(120deg, #b23850, #3b8beb);
-        }
-    </style>
+		.navbar {
+			background: linear-gradient(120deg, #b23850, #3b8beb);
+		}
+
+		.navbar-nav .dropdown:hover .dropdown-menu {
+			display: block;
+		}
+	</style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#" style="font-family: 'Poppins', sans-serif;">Atlet</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Tes Kualifikasi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Daftar Event</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Enrolled Event</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Daftar Sponsor</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account:logout' %}">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<nav class="navbar navbar-expand-lg navbar-dark">
+		<div class="container">
+			<a class="navbar-brand" href="#" style="font-family: 'Poppins', sans-serif;">Atlet</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="#">Dashboard</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="tesKualifikasiDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Tes Kualifikasi
+						</a>
+						<div class="dropdown-menu" aria-labelledby="tesKualifikasiDropdown">
+							<a class="dropdown-item" href="#">List Ujian Kualifikasi</a>
+							<a class="dropdown-item" href="#">Riwayat Ujian Kualifikasi</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="tesKualifikasiDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Event
+						</a>
+						<div class="dropdown-menu" aria-labelledby="tesKualifikasiDropdown">
+							<a class="dropdown-item" href="#">Daftar Event</a>
+							<a class="dropdown-item" href="{% url 'trigger_ungu:show_enrolled_event' %}">Enrolled
+								Event</a>
+						</div>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="tesKualifikasiDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Sponsor
+						</a>
+						<div class="dropdown-menu" aria-labelledby="tesKualifikasiDropdown">
+							<a class="dropdown-item" href="{% url 'trigger_ungu:register_sponsor' %}">Daftar
+								Sponsor</a>
+							<a class="dropdown-item" href="{% url 'trigger_ungu:show_list_sponsor' %}">List Sponsor</a>
+						</div>
+					</li <li class="nav-item">
+					<a class="nav-link" href="{% url 'account:logout' %}">Logout</a>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+	</nav>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+	<!-- Bootstrap JS -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>

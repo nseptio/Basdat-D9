@@ -8,7 +8,11 @@
     body {
         font-family: 'Poppins', sans-serif;
         background-color: #C4DBF6;
+    }
 
+    th,
+    td {
+        vertical-align: middle;
     }
 
     .nav-item .nav-link {
@@ -30,93 +34,59 @@
         background: linear-gradient(120deg, #b23850, #3b8beb);
     }
 
-    button {
-        display: block;
-        width: 100%;
-        height: 40px; /* adjust as needed */
-        margin-top: 10px; /* adjust as needed */
-    }
-    
-    .form-group label {
-        display: block;
-        position: relative;
+    .bg-table {
+        background-color: #3b8beb;
+        border-radius: 20px;
+        padding: 12px;
     }
 
-    .form-group label input {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-        cursor: pointer;
+    .bg-secondary-table {
+        background-color: #b23850;
+        border-radius: 20px;
+        padding: 12px;
     }
-
 </style>
-<title>Daftar Sponsor</title>
+<title>Enrolled Events Athlete</title>
 
 {% endblock meta %}
 
 {% block content %}
 
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container">
-        <a class="navbar-brand" href="#" style="font-family: 'Poppins', sans-serif;">Atlet</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Tes Kualifikasi</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Daftar Event</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Enrolled Event</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Daftar Sponsor</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-  </nav>
+<main>
+    <section>
+        {% include 'navbar-atlet.html' %}
+    </section>
 
-  <div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h1 class="text-center mb-4">DAFTAR SPONSOR</h1>
-          <form>
-            <div class="form-group mb-3">
-              <label for="sponsor">Nama Sponsor</label>
-              <select class="form-control" id="sponsor">
-                <option value="" selected disabled>Pilih Sponsor</option>
-                <option value="Sponsor A">Schamberger-Zboncak</option>
-                <option value="Sponsor B">Sipes-Carroll</option>
-                <option value="Sponsor C">Reichert-Robel</option>
-              </select>
+    <div class="row m-3">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-table text-white">
+                    <h3 class="card-title text-dark">Daftar Sponsor Atlet</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr class="bg-secondary-table text-white text-center align-middle">
+                                <th>Nama Sponsor</th>
+                                <th>Tanggal Mulai</th>
+                                <th>Tanggal Selesai</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in record %}
+                            <tr>
+                                <td>{{ item.0 }}</td>
+                                <td>{{ item.1 }}</td>
+                                <td>{{ item.2 }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="form-group mb-3">
-              <label for="start-date">Tanggal Mulai</label>
-              <input type="date" class="form-control" id="start-date">
-            </div>
-            <div class="form-group mb-3">
-              <label for="end-date">Tanggal Selesai</label>
-              <input type="date" class="form-control" id="end-date">
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Daftar</button>
-          </form>
         </div>
-      </div>
     </div>
-  </div>
-</div>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</main>
 {% endblock %}
