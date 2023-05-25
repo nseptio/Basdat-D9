@@ -47,7 +47,7 @@ def show_latih_atlet (request):
                     INSERT INTO ATLET_PELATIH VALUES ('{id_pelatih}', '{id_atlet}');
                     """
             cursor.execute(query2)
-            return redirect("/list_atlet_dilatih")
+            return redirect("/pink_latih_atlet/list_atlet_dilatih")
         
     query3 = """
     SELECT M.Name, M.ID 
