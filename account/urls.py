@@ -5,7 +5,7 @@ app_name = 'account'
 
 urlpatterns = [
     path('', show_main, name='babadu'),
-    path('user', show_dashboard, name='show_dashboard'),
+    path('user/', show_dashboard, name='show_dashboard'),
     path('login/', login, name='login'),
     path('logout/', logout, name='logout'),
     path('register/', register, name='register'),
