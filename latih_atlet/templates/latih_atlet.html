@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+  .nav-item .nav-link {
+      font-family: 'Poppins', sans-serif;
+      border-radius: 20px;
+      padding: 8px 15px;
+  }
+
+  .nav-item .nav-link:hover {
+      background-color: #3b8beb;
+      color: #fff;
+  }
+
+  .nav-item .nav-link.active {
+      background-color: #fff;
+      color: #000;
+  }
+
+  .navbar {
+      background: linear-gradient(120deg, #b23850, #3b8beb);
+  }
+</style>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+      <a class="navbar-brand" href="#" style="font-family: 'Poppins', sans-serif;">Pelatih</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Daftar Atlet</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">List Atlet</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Logout</a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</nav>
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Latih Atlet</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+    body {
+      background: #c4dbf6;
+      background-attachment: fixed;
+      background-size: cover;
+      background-repeat: no-repeat;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .form-container {
+      max-width: 400px;
+      margin: 0 auto;
+      margin-top: 100px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-container h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+    
+    .form-btn {
+      width: 100%;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <h1>Daftar Atlet</h1>
+      <form action = "/latih_atlet/" method = "POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="athlete-select">Atlet yang mau didaftarkan:</label>
+          <select class="form-control" name="athlete-select" id="athlete-select">
+            <option>Select an athlete</option>
+            {% for nama_id_atlet in list_nama_id_atlet %}
+              <option value="{{nama_id_atlet.id}}">{{ nama_id_atlet.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block form-btn">Submit</button>
+      </form>
+    </div>
+  </div>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
