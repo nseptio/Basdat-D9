@@ -9,7 +9,7 @@
 **BABADU** (Badan Badminton Dunia) merupakan sebuah organisasi yang menaungi pertandingan utama badminton di level internasional. Sistem informasi BABADU menyimpan data terkait tur dunia badminton yang dilakukan setiap tahun. Member yang dapat mendaftar pada sistem informasi BABADU adalah atlet, pelatih, dan umpire.
 
 ## 📖User Guide📖
-Akses user manual guide BABADU [di sini.](ristek.link/UserManual-D09)
+Akses user manual guide BABADU [di sini.](ristek.link/UserManual-D-09)
 
 ## 📚Daftar Role📚
 Berikut daftar *role* dan deskripsi dari masing-masing *role*.
