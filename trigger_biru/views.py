@@ -68,7 +68,7 @@ def daftar_partai(request, nama_stadium, nama_event, tahun_event):
                 
                 jenis_partai = reverse_map_partai.get(jenis_partai)
                                 
-                cursor.execute("select id from member where email = %s", (email_pasangan,))
+                cursor.execute("select id from member where email = %s", (email_pasangan))
                 id_pasangan = cursor.fetchone()[0]
                 
                 id_atlet_ganda = get_id_atlet_ganda(athlete_id, cursor, id_pasangan)
@@ -191,7 +191,7 @@ def get_nomor_peserta_ganda(cursor, id_atlet_ganda):
                 FROM peserta_kompetisi
                 WHERE id_atlet_ganda = %s
                 """
-    cursor.execute(query_get_nomor_peserta, (id_atlet_ganda,))
+    cursor.execute(query_get_nomor_peserta, (id_atlet_ganda))
     nomor_peserta = cursor.fetchone()
     return nomor_peserta
 
