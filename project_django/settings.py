@@ -44,8 +44,7 @@ INSTALLED_APPS = [
     'daftar_atlet',
     'hasil_pertandingan',
     'latih_atlet',
-    'partai_kompetisi_event'
-
+    'partai_kompetisi_event',
     'trigger_biru',
 ]
 
