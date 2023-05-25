@@ -15,10 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from daftar_atlet.views import show_daftar_atlet
+from partai_kompetisi_event.views import show_partai_kompetisi_event
+from hasil_pertandingan.views import show_hasil_pertandingan
+from latih_atlet.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('account.urls')),
+    path('pink_hasil_pertandingan/', include('hasil_pertandingan.urls')),
+    path('pink_latih_atlet/', include('latih_atlet.urls')),
+    path('pink_daftar_atlet/', include('daftar_atlet.urls')),
+    path('pink_partai_kompetisi_event/', include('partai_kompetisi_event.urls')),
     path('ungu/', include('trigger_ungu.urls')),
     path('ujian_kualifikasi/', include('ujian_kualifikasi.urls')),
+    path('biru/', include('trigger_biru.urls')),
 ]
+

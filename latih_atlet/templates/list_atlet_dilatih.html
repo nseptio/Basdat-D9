@@ -1,0 +1,115 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+    .nav-item .nav-link {
+        font-family: 'Poppins', sans-serif;
+        border-radius: 20px;
+        padding: 8px 15px;
+    }
+
+    .nav-item .nav-link:hover {
+        background-color: #3b8beb;
+        color: #fff;
+    }
+
+    .nav-item .nav-link.active {
+        background-color: #fff;
+        color: #000;
+    }
+
+    .navbar {
+        background: linear-gradient(120deg, #b23850, #3b8beb);
+    }
+</style>
+
+
+<!DOCTYPE html>
+<section>
+  {% include 'navbar-pelatih.html' %}
+</section>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List Atlet</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+    body {
+        background: #c4dbf6;
+        background-attachment: fixed;
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    .table-container {
+      max-width: 600px;
+      margin: 0 auto;
+      margin-top: 100px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .table-container h1 {
+      text-align: center;
+      padding: 20px;
+      color: #fff;
+      background: linear-gradient(120deg, #b23850, #e75567);
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+    
+    .table-container table {
+      width: 100%;
+    }
+    
+    .table-container th,
+    .table-container td {
+      padding: 10px;
+      text-align: center;
+    }
+    
+    .table-container thead {
+        background: linear-gradient(120deg, #b23850, #e75567);
+      color: #fff;
+    }
+    
+    .table-container tbody tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="table-container">
+      <h1>List Atlet Dilatih</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nama Atlet</th>
+            <th>Email</th>
+            <th>World Rank</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for atlet_dilatih in daftar_atlet_dilatih %}
+            <tr>
+              <td>{{ atlet_dilatih.name }}</td>
+              <td>{{ atlet_dilatih.email }}</td>
+              {% if atlet_dilatih.world_rank %}
+                <td>{{ atlet_dilatih.world_rank }}</td>
+              {% else %}
+                <td>-</td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,31 +1,31 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
-
+  
     .nav-item .nav-link {
         font-family: 'Poppins', sans-serif;
         border-radius: 20px;
         padding: 8px 15px;
     }
-
+  
     .nav-item .nav-link:hover {
         background-color: #3b8beb;
         color: #fff;
     }
-
+  
     .nav-item .nav-link.active {
         background-color: #fff;
         color: #000;
     }
-
+  
     .navbar {
         background: linear-gradient(120deg, #b23850, #3b8beb);
     }
-</style>
-
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  </style>
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-        <a class="navbar-brand" href="#" style="font-family: 'Poppins', sans-serif;">Pelatih</a>
+        <a class="navbar-brand" href="{% url 'account:show_dashboard' %}"
+            style="font-family: 'Poppins', sans-serif;">Pelatih</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -33,13 +33,17 @@
         <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Dashboard</a>
+                    <a class="nav-link" href="{% url 'account:show_dashboard' %}">Dashboard</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Daftar Atlet</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">List Atlet</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="latihAtletDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Latih Atlet
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="latihAtletDropdown">
+                        <a class="dropdown-item" href="{% url 'latih_atlet:show_latih_atlet' %}">Create Latih Atlet</a>
+                        <a class="dropdown-item" href="{% url 'latih_atlet:show_list_atlet_dilatih' %}">List Atlet Dilatih</a>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'account:logout' %}">Logout</a>
@@ -47,4 +51,9 @@
             </ul>
         </div>
     </div>
-</nav>
+  </nav>
+  
+  <!-- Include the Bootstrap JavaScript file -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.4.0/js/bootstrap.bundle.min.js"></script>
+  

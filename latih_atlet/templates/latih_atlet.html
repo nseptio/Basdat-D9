@@ -1,15 +1,19 @@
 <!DOCTYPE html>
+<section>
+  {% include 'navbar-pelatih.html' %}
+</section>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DAFTAR ATLET</title>
+  <title>Form Latih Atlet</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 
     body {
-      background: linear-gradient(120deg, #3b8beb, #c4dbf6);
+      background: #c4dbf6;
       background-attachment: fixed;
       background-size: cover;
       background-repeat: no-repeat;
@@ -38,19 +42,21 @@
     }
   </style>
 </head>
+
+
 <body>
   <div class="container">
     <div class="form-container">
       <h1>Daftar Atlet</h1>
-      <form>
+      <form action = "/pink_latih_atlet/latih_atlet/" method = "POST">
+        {% csrf_token %}
         <div class="form-group">
           <label for="athlete-select">Atlet yang mau didaftarkan:</label>
-          <select class="form-control" id="athlete-select">
+          <select class="form-control" name="athlete-select" id="athlete-select">
             <option>Select an athlete</option>
-            <option>Athlete 1</option>
-            <option>Athlete 2</option>
-            <option>Athlete 3</option>
-            <!-- Add more options as needed -->
+            {% for nama_id_atlet in list_nama_id_atlet %}
+              <option value="{{nama_id_atlet.id}}">{{ nama_id_atlet.name }}</option>
+            {% endfor %}
           </select>
         </div>
         <button type="submit" class="btn btn-primary btn-block form-btn">Submit</button>

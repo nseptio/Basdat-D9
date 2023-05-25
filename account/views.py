@@ -94,7 +94,6 @@ def register_umpire(request):
             cursor.execute(
                 f"insert into MEMBER (ID, Name, email) values ('{uuid_umpire}', '{name}', '{email}')"
             )
-            print("aaaaa")
             
             cursor.execute(
                 f"insert into UMPIRE (ID, Negara) values ('{uuid_umpire}', '{negara}')"
@@ -377,8 +376,9 @@ def dashboard_atlet(request, email, atlet):
 def dashboard_pelatih(request, email, pelatih):
     tanggal_mulai = pelatih[0][1]
     nama = pelatih[0][2]
-    cursor.execute("SELECT name, tanggal_mulai, spesialisasi FROM MEMBER M NATURAL JOIN PELATIH P JOIN PELATIH_SPESIALISASI PS ON " +
-        "P.id = PS.id_pelatih JOIN SPESIALISASI S ON PS.id_spesialisasi = S.id WHERE M.email = '{email}';")
+    cursor.execute(
+        "SELECT name, tanggal_mulai, spesialisasi FROM MEMBER M NATURAL JOIN PELATIH P JOIN PELATIH_SPESIALISASI PS ON " +
+        f"P.id = PS.id_pelatih JOIN SPESIALISASI S ON PS.id_spesialisasi = S.id WHERE M.email = '{email}';")
     pelatih_data = cursor.fetchall()
     kategori = []
     for data in pelatih_data:
@@ -391,7 +391,7 @@ def dashboard_pelatih(request, email, pelatih):
         "nama": nama,
         "kategori": kategori,
     }
-    print(context)
+    
     response = render(request, "dashboard-pelatih.html", context)
     response.set_cookie("role", "pelatih")
     response.set_cookie("email", email)
