@@ -41,6 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account',
     'trigger_ungu',
+    'daftar_atlet',
+    'hasil_pertandingan',
+    'latih_atlet',
+    'partai_kompetisi_event',
+    'trigger_biru',
 ]
 
 MIDDLEWARE = [

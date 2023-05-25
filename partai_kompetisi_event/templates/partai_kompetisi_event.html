@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIST ATLET</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+    body {
+      background-color: #f2f2f2;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .table-container h1 {
+      text-align: center;
+      padding: 20px;
+      color: #333;
+    }
+    
+    .table-container table {
+      width: 100%;
+    }
+    
+    .table-container th,
+    .table-container td {
+      padding: 10px;
+      text-align: center;
+    }
+    
+    .table-container thead {
+      background-color: #007bff;
+      color: #fff;
+    }
+    
+    .table-container tbody tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="table-container">
+      <h1>List Partai Kompetisi</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nama Event</th>
+            <th>Tahun</th>
+            <th>Stadium</th>
+            <th>Jenis Partai</th>
+            <th>Kategori Superseries</th>
+            <th>Tanggal Mulai</th>
+            <th>Tanggal Selesai</th>
+            <th>Kapasitas</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for partai_kompetisi_event in daftar_partai_kompetisi_event %}
+          <tr>
+            <td>{{ partai_kompetisi_event.nama_event }}</td>
+            <td>{{ partai_kompetisi_event.tahun }}</td>
+            <td>{{ partai_kompetisi_event.nama_stadium }}</td>
+            <td>{{ partai_kompetisi_event.jenis_partai }}</td>
+            <td>{{ partai_kompetisi_event.kategori_superseries }}</td>
+            <td>{{ partai_kompetisi_event.tgl_mulai }}</td>
+            <td>{{ partai_kompetisi_event.tgl_selesai }}</td>
+            <td>{{ partai_kompetisi_event.jumlah_peserta }}/{{ partai_kompetisi_event.kapasitas }}</td>
+            <td>
+              {% if partai_kompetisi_event.jumlah_peserta == partai_kompetisi_event.kapasitas %}
+                <a href="">
+                  <button type="button" class="btn btn-primary">Mulai</button>
+                </a>
+                <a href="{% url 'show_hasil_pertandingan' %}?nama_event={{ partai_kompetisi_event.nama_event|urlencode }}&tahun={{ partai_kompetisi_event.tahun|urlencode }}&jenis_partai={{ partai_kompetisi_event.jenis_partai|urlencode }}">
+                  <button type="button" class="btn btn-primary">Hasil Pertandingan</button>
+                </a>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+      
+      
+    </div>
+  </div>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIST ATLET</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+    body {
+      background-color: #f2f2f2;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .table-container h1 {
+      text-align: center;
+      padding: 20px;
+      color: #333;
+    }
+    
+    .table-container table {
+      width: 100%;
+    }
+    
+    .table-container th,
+    .table-container td {
+      padding: 10px;
+      text-align: center;
+    }
+    
+    .table-container thead {
+      background-color: #007bff;
+      color: #fff;
+    }
+    
+    .table-container tbody tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+  .nav-item .nav-link {
+    font-family: 'Poppins', sans-serif;
+    border-radius: 20px;
+    padding: 8px 15px;
+  }
+
+  .nav-item .nav-link:hover {
+    background-color: #3b8beb;
+    color: #fff;
+  }
+
+  .nav-item .nav-link.active {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .navbar {
+    background: linear-gradient(120deg, #b23850, #3b8beb);
+  }
+
+  </style>
+</head>
+
+<body>
+  
+  <div class="container">
+    <div class="table-container">
+      <h1>Daftar Atlet</h1>
+      <h2>Atlet Kualifikasi</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>Tanggal Lahir</th>
+            <th>Negara Asal</th>
+            <th>Play Right</th>
+            <th>Height</th>
+            <th>World Rank</th>
+            <th>World Tour Rank</th>
+            <th>Jenis Kelamin</th>
+            <th>Total Point</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for atlet_kualifikasi in daftar_atlet_kualifikasi %}
+            <tr>
+            <td>{{ atlet_kualifikasi.name }}</td>
+            <td>{{ atlet_kualifikasi.tgl_lahir }}</td>
+            <td>{{ atlet_kualifikasi.negara_asal }}</td>
+            {% if atlet_kualifikasi.play_right %}
+                <td>Ya</td>
+            {% else %}
+                <td>Tidak</td>
+            {% endif %}
+            <td>{{ atlet_kualifikasi.height }}</td>
+            <td>{{ atlet_kualifikasi.world_rank }}</td>
+            <td>{{ atlet_kualifikasi.world_tour_rank }}</td>
+            {% if atlet_kualifikasi.jenis_kelamin %}
+                <td>Laki-Laki</td>
+            {% else %}
+                <td>Perempuan</td>
+            {% endif %}
+            <td>{{ atlet_kualifikasi.total_point }}</td>
+            </tr>
+            {% endfor %}   
+        </tbody>
+      </table>
+      <h2>Atlet Non-Kualifikasi</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>Tanggal</th>
+            <th>Negara</th>
+            <th>Play</th>
+            <th>Height</th>
+            <th>World</th>
+            <th>Jenis</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for atlet_non_kualifikasi in daftar_atlet_non_kualifikasi %}
+          <tr>
+            <td>{{ atlet_non_kualifikasi.name }}</td>
+            <td>{{ atlet_non_kualifikasi.tgl_lahir }}</td>
+            <td>{{ atlet_non_kualifikasi.negara_asal }}</td>
+            {% if atlet_non_kualifikasi.play_right %}
+              <td>Ya</td>
+            {% else %}
+              <td>Tidak</td>
+            {% endif %}
+            <td>{{ atlet_non_kualifikasi.height }}</td>
+            <td>-</td>
+            {% if atlet_non_kualifikasi.jenis_kelamin %}
+              <td>Laki-Laki</td>
+            {% else %}
+              <td>Perempuan</td>
+            {% endif %}
+            <td>0</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <h2>Atlet Ganda</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID Atlet Ganda</th>
+            <th>Nama Atlet 1</th>
+            <th>Nama Atlet 2</th>
+            <th>Total Point</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for atlet_ganda in daftar_atlet_ganda %}
+              <tr>
+                <td>{{ atlet_ganda.id_atlet_ganda }}</td>
+                <td>{{ atlet_ganda.nama1 }}</td>
+                <td>{{ atlet_ganda.nama2 }}</td>
+                <td>{{ atlet_ganda.total_point }}</td>
+              </tr>
+              {% endfor %} 
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

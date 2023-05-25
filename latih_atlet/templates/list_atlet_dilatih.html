@@ -1,16 +1,44 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+    .nav-item .nav-link {
+        font-family: 'Poppins', sans-serif;
+        border-radius: 20px;
+        padding: 8px 15px;
+    }
+
+    .nav-item .nav-link:hover {
+        background-color: #3b8beb;
+        color: #fff;
+    }
+
+    .nav-item .nav-link.active {
+        background-color: #fff;
+        color: #000;
+    }
+
+    .navbar {
+        background: linear-gradient(120deg, #b23850, #3b8beb);
+    }
+</style>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LIST ATLET</title>
+  <title>List Atlet</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 
     body {
-      background-color: #f2f2f2;
-      font-family: 'Poppins', sans-serif;
+        background: #c4dbf6;
+        background-attachment: fixed;
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: 'Poppins', sans-serif;
     }
     
     .table-container {
@@ -25,7 +53,10 @@
     .table-container h1 {
       text-align: center;
       padding: 20px;
-      color: #333;
+      color: #fff;
+      background: linear-gradient(120deg, #b23850, #e75567);
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
     }
     
     .table-container table {
@@ -39,7 +70,7 @@
     }
     
     .table-container thead {
-      background-color: #007bff;
+        background: linear-gradient(120deg, #b23850, #e75567);
       color: #fff;
     }
     
@@ -51,7 +82,7 @@
 <body>
   <div class="container">
     <div class="table-container">
-      <h1>LIST ATLET</h1>
+      <h1>List Atlet Dilatih</h1>
       <table class="table">
         <thead>
           <tr>
@@ -61,16 +92,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Sukiman1</td>
-            <td>Sukiman1@gmail.com</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>Sukiman2</td>
-            <td>Sukiman2@gmail.com</td>
-            <td>2</td>
-          </tr>
+            {% for atlet_dilatih in daftar_atlet_dilatih %}
+            <tr>
+              <td>{{ atlet_dilatih.name }}</td>
+              <td>{{ atlet_dilatih.email }}</td>
+              {% if atlet_dilatih.world_rank %}
+                <td>{{ atlet_dilatih.world_rank }}</td>
+              {% else %}
+                <td>-</td>
+              {% endif %}
+            </tr>
+            {% endfor %}
         </tbody>
       </table>
     </div>
