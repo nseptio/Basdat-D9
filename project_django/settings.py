@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account',
     'trigger_ungu',
+    'ujian_kualifikasi',
 ]
 
 MIDDLEWARE = [
