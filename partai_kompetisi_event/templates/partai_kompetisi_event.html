@@ -13,14 +13,14 @@
       font-family: 'Poppins', sans-serif;
     }
     
-     .table-container {
+     /* .table-container {
       max-width: 600px;
       margin: 0 auto;
       margin-top: 100px;
       background-color: #fff;
       border-radius: 5px;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
+    } */
     
     .table-container h1 {
       text-align: center;
@@ -78,14 +78,20 @@
             <td>{{ partai_kompetisi_event.tgl_selesai }}</td>
             <td>{{ partai_kompetisi_event.jumlah_peserta }}/{{ partai_kompetisi_event.kapasitas }}</td>
             <td>
-              {% if partai_kompetisi_event.jumlah_peserta == partai_kompetisi_event.kapasitas %}
+              <!-- {% if partai_kompetisi_event.jumlah_peserta == partai_kompetisi_event.kapasitas %}
                 <a href="">
                   <button type="button" class="btn btn-primary">Mulai</button>
                 </a>
                 <a href="{% url 'show_hasil_pertandingan' %}?nama_event={{ partai_kompetisi_event.nama_event|urlencode }}&tahun={{ partai_kompetisi_event.tahun|urlencode }}&jenis_partai={{ partai_kompetisi_event.jenis_partai|urlencode }}">
                   <button type="button" class="btn btn-primary">Hasil Pertandingan</button>
                 </a>
-              {% endif %}
+              {% endif %} -->
+              <a href="">
+                <button type="button" class="btn btn-primary">Mulai</button>
+              </a>
+              <a href="{% url 'show_hasil_pertandingan' %}?nama_event={{ partai_kompetisi_event.nama_event|urlencode }}&tahun={{ partai_kompetisi_event.tahun|urlencode }}&jenis_partai={{ partai_kompetisi_event.jenis_partai|urlencode }}">
+                <button type="button" class="btn btn-primary">Hasil Pertandingan</button>
+              </a>
             </td>
           </tr>
           {% endfor %}
