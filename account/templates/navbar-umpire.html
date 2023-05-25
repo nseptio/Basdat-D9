@@ -1,132 +1,35 @@
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
-
-  .nav-item .nav-link {
-    font-family: 'Poppins', sans-serif;
-    border-radius: 20px;
-    padding: 8px 15px;
-  }
-
-  .nav-item .nav-link:hover {
-    background-color: #3b8beb;
-    color: #fff;
-  }
-
-  .nav-item .nav-link.active {
-    background-color: #fff;
-    color: #000;
-  }
-
-  .navbar {
-    background: linear-gradient(120deg, #b23850, #3b8beb);
-  }
-</style>
-
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container">
-    <a class="navbar-brand" href="#" style="font-family: 'Poppins', sans-serif;">Umpire</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'daftar_atlet:show_daftar_atlet' %}">Daftar Atlet</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Lihat Event</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'hasil_pertandingan:show_hasil_pertandingan' %}">Hasil Pertandingan</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'account:logout' %}">Logout</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-
-
-
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
-
-  .nav-item .nav-link {
-      font-family: 'Poppins', sans-serif;
-      border-radius: 20px;
-      padding: 8px 15px;
-  }
-
-  .nav-item .nav-link:hover {
-      background-color: #3b8beb;
-      color: #fff;
-  }
-
-  .nav-item .nav-link.active {
-      background-color: #fff;
-      color: #000;
-  }
-
-  .navbar {
-      background: linear-gradient(120deg, #b23850, #3b8beb);
-  }
-</style>
-
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form Latih Atlet</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
-
-    body {
-      background: #c4dbf6;
-      background-attachment: fixed;
-      background-size: cover;
-      background-repeat: no-repeat;
-      font-family: 'Poppins', sans-serif;
+  
+    .nav-item .nav-link {
+        font-family: 'Poppins', sans-serif;
+        border-radius: 20px;
+        padding: 8px 15px;
     }
-    
-    .form-container {
-      max-width: 400px;
-      margin: 0 auto;
-      margin-top: 100px;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  
+    .nav-item .nav-link:hover {
+        background-color: #3b8beb;
+        color: #fff;
     }
-    
-    .form-container h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      color: #333;
+  
+    .nav-item .nav-link.active {
+        background-color: #fff;
+        color: #000;
     }
-    
-    .form-btn {
-      width: 100%;
-      margin-top: 20px;
+  
+    .navbar {
+        background: linear-gradient(120deg, #b23850, #3b8beb);
     }
   </style>
-</head>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container">
-      <a class="navbar-brand" href="#" style="font-family: 'Poppins', sans-serif;">Umpire</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="#" style="font-family: 'Poppins', sans-serif;">Pelatih</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
           <ul class="navbar-nav ml-auto">
               <li class="nav-item">
                   <a class="nav-link" href="#">Dashboard</a>
@@ -141,31 +44,34 @@
                   </div>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="AtletDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Ujian Kualifikasi
-                </a>
-                <div class="dropdown-menu" aria-labelledby="AtletDropdown">
-                    <a class="dropdown-item" href="#">Buat Ujian Kualifikasi</a>
-                  <a class="dropdown-item" href="#">List Ujian Kualifikasi</a>
-                <a class="dropdown-item" href="#">Riwayat Ujian Kualifikasi</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="AtletDropdown" role="button"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Event
-              </a>
-              <div class="dropdown-menu" aria-labelledby="AtletDropdown">
-                  <a class="dropdown-item" href="{% url 'partai_kompetisi_event:show_partai_kompetisi_event' %}">List Partai Kompetisi</a>
-          </li>
+                  <a class="nav-link dropdown-toggle" href="#" id="UjianKualifikasiDropdown" role="button"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Ujian Kualifikasi
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="UjianKualifikasiDropdown">
+                      <a class="dropdown-item" href="#">Buat Ujian Kualifikasi</a>
+                      <a class="dropdown-item" href="#">List Ujian Kualifikasi</a>
+                      <a class="dropdown-item" href="#">Riwayat Ujian Kualifikasi</a>
+                  </div>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="EventDropdown" role="button"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Event
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="EventDropdown">
+                      <a class="dropdown-item" href="{% url 'partai_kompetisi_event:show_partai_kompetisi_event' %}">List Partai Kompetisi</a>
+                  </div>
+              </li>
               <li class="nav-item">
                   <a class="nav-link" href="{% url 'account:logout' %}">Logout</a>
               </li>
           </ul>
       </div>
-  </div>
-</nav>
-
-<!-- Include the Bootstrap JavaScript file -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.4.0/js/bootstrap.bundle.min.js"></script>
+    </div>
+  </nav>
+  
+  <!-- Include the Bootstrap JavaScript file -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.4.0/js/bootstrap.bundle.min.js"></script>
+  
