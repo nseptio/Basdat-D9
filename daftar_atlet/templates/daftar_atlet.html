@@ -92,7 +92,6 @@
           </tr>
         </thead>
         <tbody>
-          <!-- <tr> -->
             {% for atlet_kualifikasi in daftar_atlet_kualifikasi %}
             <tr>
             <td>{{ atlet_kualifikasi.name }}</td>
@@ -167,8 +166,8 @@
           {% for atlet_ganda in daftar_atlet_ganda %}
               <tr>
                 <td>{{ atlet_ganda.id_atlet_ganda }}</td>
-                <td>{{ atlet_ganda.nama_atlet_1 }}</td>
-                <td>{{ atlet_ganda.nama_atlet_2 }}</td>
+                <td>{{ atlet_ganda.nama1 }}</td>
+                <td>{{ atlet_ganda.nama2 }}</td>
                 <td>{{ atlet_ganda.total_point }}</td>
               </tr>
               {% endfor %} 

@@ -35,7 +35,9 @@ def show_latih_atlet (request):
         id_atlet = request.POST.get("athlete-select")
         
         query = f"""
-                SELECT ID FROM MEMBER WHERE EMAIL LIKE '{email_pelatih}';
+                SELECT ID 
+                FROM MEMBER 
+                WHERE Email LIKE '{email_pelatih}';
                 """
         cursor.execute(query)
         id_pelatih = fetch_data(cursor)[0]['id']
@@ -48,10 +50,10 @@ def show_latih_atlet (request):
             return redirect("/list_atlet_dilatih")
         
     query3 = """
-    SELECT M.Name, M.id 
+    SELECT M.Name, M.ID 
     FROM MEMBER M, ATLET A 
     WHERE M.ID = A.ID 
-    ORDER BY M.name;
+    ORDER BY M.Name;
     """
     cursor.execute(query3)
     list_nama_id_atlet = fetch_data(cursor)
