@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Riwayat Ujian Kualifikasi</title>
+<link rel="stylesheet" href="{% static 'umpire/style.css' %}">
+{% endblock meta %}
+
+{% block content %}
+<!-- nav -->
+{% include "navbar-umpire.html" %}
+<div class="container text-center mt-5">
+    <div class="title indigo text-center mt-5">Riwayat Ujian Kualifikasi</div>
+    <br>
+    <section class="ftco-section mb-4">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-wrap">
+              <table class="table">
+                <thead class="thead-primary">
+                  <tr>
+                    <th>Nama Atlet</th>
+                    <th>Tahun</th>
+                    <th>Batch</th>
+                    <th>Tempat Pelaksanaan</th>
+                    <th>Tanggal Pelaksanaan</th>
+                    <th>Hasil</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for riwayat in riwayat_ujian_umpire %}
+                  <tr>
+                    <td>{{ riwayat.nama }}</td>
+                    <td>{{ riwayat.tahun }}</td>
+                    <td>{{ riwayat.batch }}</td>
+                    <td>{{ riwayat.tempat }}</td>
+                    <td>{{ riwayat.tanggal }}</td>
+                    <td>
+                        {% if riwayat.hasil_lulus == True %}
+                        <p>Lulus</p>
+                        {% else %}
+                        <p>Tidak Lulus</p>
+                        {% endif %}
+                    </td>
+                  </tr>
+                  {% endfor %}   
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+    </section>
+</div>
+{% endblock content %}

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'latih_atlet',
     'partai_kompetisi_event',
     'trigger_biru',
+    'ujian_kualifikasi',
 ]
 
 MIDDLEWARE = [

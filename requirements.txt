@@ -11,6 +11,7 @@ requests==2.28.1
 six==1.16.0
 sqlparse==0.4.2
 typed-ast==1.5.4
+tzdata==2023.3
 urllib3==1.26.11
 whitenoise==6.2.0
 wrapt==1.14.1

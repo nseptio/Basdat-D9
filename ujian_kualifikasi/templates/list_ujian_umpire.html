@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>List Ujian Kualifikasi</title>
+<link rel="stylesheet" href="{% static 'umpire/style.css' %}">
+{% endblock meta %}
+
+{% block content %}
+<!-- nav -->
+{% include "navbar-umpire.html" %}
+<div class="container text-center mt-5">
+    <div class="title indigo text-center mt-5">List Ujian Kualifikasi</div>
+    <br>
+    <section class="ftco-section mb-4">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-wrap">
+              <table class="table">
+                <thead class="thead-primary">
+                  <tr>
+                    <th>Tahun</th>
+                    <th>Batch</th>
+                    <th>Tempat Pelaksanaan</th>
+                    <th>Tanggal Pelaksanaan</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for ujian in ujian_kualifikasi %}
+                  <tr>
+                    <td>{{ ujian.tahun }}</td>
+                    <td>{{ ujian.batch }}</td>
+                    <td>{{ ujian.tempat }}</td>
+                    <td>{{ ujian.tanggal }}</td>
+                  </tr>
+                  {% endfor %}   
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+    </section>
+</div>
+{% endblock content %}
